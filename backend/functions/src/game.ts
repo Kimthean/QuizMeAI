@@ -35,7 +35,7 @@ export const handler = functions.https.onRequest(
         });
 
         const { data } = await axios.post(
-          `http://127.0.0.1:5001/quizz-backend/us-central1/questions`,
+          "https://us-central1-quizz-backend.cloudfunctions.net/questions",
           {
             amount,
             topic,

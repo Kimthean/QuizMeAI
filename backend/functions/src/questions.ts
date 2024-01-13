@@ -4,7 +4,6 @@ import { strict_output } from "./gpt";
 export const handler = functions.https.onRequest(
   async (request: any, response: any) => {
     const { amount, topic, type } = request.body;
-    console.log(amount, topic, type);
     let questions: any;
     if (type === "open_ended") {
       questions = await strict_output(

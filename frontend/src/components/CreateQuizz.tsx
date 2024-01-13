@@ -49,16 +49,12 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
   const { mutate: getQuestions } = useMutation({
     mutationFn: async ({ amount, topic, type }: Input) => {
       const response = await axios.post(
-        "http://127.0.0.1:5001/quizz-backend/us-central1/game",
-        { amount, topic, type, userId },
-        {
-          baseURL: apiUrl,
-        }
+        `${process.env.NEXT_PUBLIC_API_URL}/game`,
+        { amount, topic, type, userId }
       );
       return response.data;
     },
   });
-
   const form = useForm<Input>({
     resolver: zodResolver(quizzSchema),
     defaultValues: {
@@ -143,7 +139,7 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
                           form.setValue("amount", parseInt(e.target.value));
                         }}
                         min={1}
-                        max={10}
+                        max={20}
                       />
                     </FormControl>
                     <FormDescription>
