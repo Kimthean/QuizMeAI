@@ -16,7 +16,6 @@ export const handler = functions.https.onRequest(
             id: gameId,
           },
         });
-        console.log(gameId);
         if (!game) {
           return response.status(404).json({
             message: "Game not found",

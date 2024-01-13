@@ -34,14 +34,11 @@ export const handler = functions.https.onRequest(
           },
         });
 
-        const { data } = await axios.post(
-          "https://us-central1-quizz-backend.cloudfunctions.net/questions",
-          {
-            amount,
-            topic,
-            type,
-          }
-        );
+        const { data } = await axios.post("/questions", {
+          amount,
+          topic,
+          type,
+        });
 
         if (type === "mcq") {
           type mcqQuestion = {
