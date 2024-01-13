@@ -7,11 +7,15 @@ import { formatTimeDelta } from "@/lib/utils";
 import { differenceInSeconds } from "date-fns";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { ChevronRight, Timer } from "lucide-react";
+import { ChevronRight, Timer, BarChart } from "lucide-react";
 import { checkAnswerSchema } from "@/schemas/form/quizz";
 import { useToast } from "./ui/use-toast";
 import AnswerInput from "./AnswerInput";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
+import { timeEnd } from "console";
 
 type Props = {
   game: Game & { questions: Pick<Question, "id" | "question" | "answer">[] };
@@ -40,7 +44,6 @@ const OpenEnded = (game: Props) => {
         questionId: currentQuestion.id,
         userAnswer: filledAnswer,
       };
-      console.log(payload);
       await checkAnswerSchema.parseAsync(payload);
       const response = await axios.post(
         "http://127.0.0.1:5001/quizz-backend/us-central1/checkAnswer",
@@ -103,6 +106,42 @@ const OpenEnded = (game: Props) => {
       redirect("/quizz");
     }
   }, [game.game.questions.length, toast]);
+
+  React.useEffect(() => {
+    if (hasEnded) {
+      const gameId = game.game.id;
+      const sendEndGameRequest = async () => {
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:5001/quizz-backend/us-central1/endGame",
+            { gameId: gameId }
+          );
+          return response.data;
+        } catch (error) {
+          console.error("Error ending game:", error);
+        }
+      };
+      sendEndGameRequest();
+    }
+  }, [hasEnded, game.game.id]);
+
+  if (hasEnded) {
+    return (
+      <div className="absolute flex flex-col justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        <div className="px-4 py-2 mt-2 font-semibold text-white bg-green-500 rounded-md whitespace-nowrap">
+          You Completed in{" "}
+          {formatTimeDelta(differenceInSeconds(now, game.game.timeStarted))}
+        </div>
+        <Link
+          href={`/statistics/${game.id}`}
+          className={cn(buttonVariants({ size: "lg" }), "mt-2")}
+        >
+          View Statistics
+          <BarChart className="w-4 h-4 ml-2" />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[80vw] max-w-4xl w-[90vw] max-sm:pt-40">

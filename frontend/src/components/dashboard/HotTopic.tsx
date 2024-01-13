@@ -7,10 +7,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import WordCloud from "../WordCloud";
+import { prisma } from "@/lib/db";
 
 type Props = {};
 
-function HotTopic({}: Props) {
+const HotTopics = async (props: Props) => {
+  const topics = await prisma.topic_count.findMany({});
+  const formattedTopics = topics.map((topic) => {
+    return {
+      text: topic.topic,
+      value: topic.count,
+    };
+  });
   return (
     <Card className="col-span-4">
       <CardHeader>
@@ -20,10 +28,10 @@ function HotTopic({}: Props) {
         </CardDescription>
       </CardHeader>
       <CardContent className="pl-2">
-        <WordCloud />
+        <WordCloud formattedTopics={formattedTopics} />
       </CardContent>
     </Card>
   );
-}
+};
 
-export default HotTopic;
+export default HotTopics;

@@ -64,7 +64,7 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
     defaultValues: {
       topic: topicParam,
       type: "mcq",
-      amount: 3,
+      amount: 5,
     },
   });
 

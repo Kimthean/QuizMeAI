@@ -118,6 +118,24 @@ function MCQSection(game: Props) {
     }
   }, [game.game.questions.length, toast]);
 
+  React.useEffect(() => {
+    if (hasEnded) {
+      const gameId = game.game.id;
+      const sendEndGameRequest = async () => {
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:5001/quizz-backend/us-central1/endGame",
+            { gameId: gameId }
+          );
+          return response.data;
+        } catch (error) {
+          console.error("Error ending game:", error);
+        }
+      };
+      sendEndGameRequest();
+    }
+  }, [hasEnded, game.game.id]);
+
   if (hasEnded) {
     return (
       <div className="absolute flex flex-col justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -126,7 +144,7 @@ function MCQSection(game: Props) {
           {formatTimeDelta(differenceInSeconds(now, game.game.timeStarted))}
         </div>
         <Link
-          href={`/statistic/${game.game.id}`}
+          href={`/statistics/${game.game.id}`}
           className={cn(buttonVariants(), "mt-2")}
         >
           View Statistics
@@ -176,12 +194,12 @@ function MCQSection(game: Props) {
           <Button
             key={index}
             variant={selectedOption === index ? "default" : "secondary"}
-            className="justify-start w-[80vw] py-8 mb-4 rounded-md"
+            className="justify-start py-8 mb-4 rounded-md w-full"
             onClick={() => {
               setSelectedOption(index);
             }}
           >
-            <div className="flex items-center justify-start">
+            <div className="flex items-center justify-start max-w-">
               <div className="p-2 px-3 mr-5 border rounded-md">{index + 1}</div>
               <div className="text-start h-auto whitespace-normal">
                 {option}
