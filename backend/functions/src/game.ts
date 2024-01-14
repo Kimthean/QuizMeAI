@@ -34,7 +34,7 @@ export const handler = functions.https.onRequest(
           },
         });
 
-        const { data } = await axios.post("/questions", {
+        const { data } = await axios.post(`${process.env.API_URL}/questions`, {
           amount,
           topic,
           type,
@@ -85,9 +85,10 @@ export const handler = functions.https.onRequest(
           });
         }
 
-        return response.json({ gameId: game.id });
+        response.json({ gameId: game.id });
       } catch (error) {
-        return response.json({ error: "An unexpected error occurred." });
+        console.error(error); // Log the error message to the console
+        response.json({ error: "An unexpected error occurred." });
       }
     });
   }
