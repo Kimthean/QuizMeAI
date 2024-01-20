@@ -44,11 +44,11 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
   const { toast } = useToast();
   const { data: session } = useSession();
   const userId = session?.user?.id;
-
+  console.log(userId);
   const { mutate: getQuestions } = useMutation({
     mutationFn: async ({ amount, topic, type }: Input) => {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/game`,
+        `https://asia-east2-quizz-backend.cloudfunctions.net/game`,
         { amount, topic, type, userId }
       );
       return response.data;
