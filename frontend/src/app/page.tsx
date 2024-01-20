@@ -18,10 +18,10 @@ export default async function Home() {
     <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
       <Card className="w-[300px]">
         <CardHeader>
-          <CardTitle>Welcome to quizzme app</CardTitle>
+          <CardTitle>Welcome to QuizzMeAI</CardTitle>
           <CardDescription>
-            Quizzzy is a platform for creating quizzes using AI!. Get started by
-            loggin in below!
+            QuizMeAi is a platform for creating quizzes using AI!. Get started
+            by loggin in below!
           </CardDescription>
         </CardHeader>
 
