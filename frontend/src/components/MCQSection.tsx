@@ -14,7 +14,6 @@ import { cn, formatTimeDelta } from "@/lib/utils";
 import { differenceInSeconds } from "date-fns";
 import { z } from "zod";
 import { redirect } from "next/navigation";
-import { apiUrl } from "@/lib/apiUrl";
 
 type Props = {
   game: Game & { questions: Pick<Question, "id" | "question" | "options">[] };
@@ -42,10 +41,7 @@ function MCQSection(game: Props) {
       try {
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/checkAnswer`,
-          payload,
-          {
-            baseURL: apiUrl,
-          },
+          payload
         );
         return response.data;
       } catch (error) {
@@ -126,7 +122,7 @@ function MCQSection(game: Props) {
         try {
           const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/endGame`,
-            { gameId: gameId },
+            { gameId: gameId }
           );
           return response.data;
         } catch (error) {
@@ -158,7 +154,7 @@ function MCQSection(game: Props) {
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[80vw] max-w-4xl w-[90vw] max-sm:pt-60 max-sm:px-6 pb-24">
       <div className="flex flex-row justify-between max-sm:pt-20">
-        <div className="flex flex-col">
+        <div className="flex flex-col max-sm:max-w-32">
           <p className="flex flex-col sm:flex-row">
             <span className="text-slate-400 mr-2 mb-2 sm:mb-0">Topic</span>
             <span className="px-2 py-1 text-white rounded-lg bg-slate-800">
@@ -172,10 +168,12 @@ function MCQSection(game: Props) {
             </span>
           </div>
         </div>
-        <MCQCounter
-          correctAnswers={correctAnswers}
-          wrongAnswers={wrongAnswers}
-        />
+        <div className="max-sm:pt-7">
+          <MCQCounter
+            correctAnswers={correctAnswers}
+            wrongAnswers={wrongAnswers}
+          />
+        </div>
       </div>
       <Card className="mt-4 w-full">
         <CardHeader className="flex flex-row items-center">
