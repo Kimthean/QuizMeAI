@@ -1,8 +1,9 @@
 import { buttonVariants } from "@/components/ui/button";
 import { prisma } from "@/lib/db";
 import { getAuthSession } from "@/lib/nextauth";
-import { LucideLayoutDashboard } from "lucide-react";
+import { LucideLayoutDashboard, LucideRefreshCcw } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
 
 import { redirect } from "next/navigation";
 import React from "react";
@@ -10,6 +11,7 @@ import ResultCard from "@/components/statistics/ResultCard";
 import AccuracyCard from "@/components/statistics/AccuracyCard";
 import TimeTaken from "@/components/statistics/TimeTaken";
 import QuestionList from "@/components/statistics/QuestionList";
+import Head from "@/components/statistics/Head";
 
 type Props = {
   params: {
@@ -54,16 +56,7 @@ const Statistics = async ({ params: { gameId } }: Props) => {
   return (
     <>
       <div className="p-8 mx-auto max-w-7xl">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Summary</h2>
-          <div className="flex items-center space-x-2">
-            <Link href="/dashboard" className={buttonVariants()}>
-              <LucideLayoutDashboard className="mr-2" />
-              Back to Dashboard
-            </Link>
-          </div>
-        </div>
-
+        <Head game={game} />
         <div className="grid gap-4 mt-4 md:grid-cols-7">
           <ResultCard accuracy={accuracy} />
           <AccuracyCard accuracy={accuracy} />

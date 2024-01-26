@@ -87,7 +87,7 @@ export const handler = functions.https.onRequest(
 
         response.json({ gameId: game.id });
       } catch (error) {
-        console.error(error); // Log the error message to the console
+        console.error(error);
         response.json({ error: "An unexpected error occurred." });
       }
     });

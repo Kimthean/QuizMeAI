@@ -2,7 +2,6 @@ import { prisma } from "@/lib/db";
 import { Clock, CopyCheck, Edit2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import MCQCounter from "./MCQCounter";
 
 type Props = {
   limit: number;
@@ -15,13 +14,19 @@ const History = async ({ limit, userId }: Props) => {
     where: {
       userId,
     },
+    include: { questions: true },
     orderBy: {
       timeStarted: "desc",
     },
   });
+
   return (
     <div className="space-y-8">
       {games.map((game) => {
+        if (game.questions.length === 0) {
+          return null;
+        }
+
         return (
           <div className="flex items-center justify-between" key={game.id}>
             <div className="flex items-center">
@@ -39,7 +44,9 @@ const History = async ({ limit, userId }: Props) => {
                 </Link>
                 <p className="flex items-center px-2 py-1 text-xs text-white rounded-lg w-fit bg-slate-800">
                   <Clock className="w-4 h-4 mr-1" />
-                  {new Date(game.timeEnded ?? 0).toLocaleDateString()}
+                  {game.timeEnded
+                    ? new Date(game.timeEnded).toLocaleDateString()
+                    : "N/A"}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {game.gameType === "mcq" ? "Multiple Choice" : "Open-Ended"}
