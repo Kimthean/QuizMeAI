@@ -25,12 +25,12 @@ const Head: React.FC<HeadProps> = ({ game }) => {
     router.push(`/play/${game.gameType}/${game.id}`);
   };
   return (
-    <div className="flex items-center justify-between space-y-2">
+    <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
       <h2 className="text-3xl font-bold tracking-tight">Summary</h2>
-      <div className="flex items-center space-x-2 sm:flex-auto">
-        <Link href="/dashboard" className={buttonVariants()}>
+      <div className="flex flex-col sm:flex-row items-center space-x-2 sm:space-x-4 space-y-2 sm:space-y-0">
+        <Link href="/quizz" className={buttonVariants()}>
           <LucideLayoutDashboard className="mr-2" />
-          Back to Dashboard
+          Create New Quizz
         </Link>
         <button className={buttonVariants()} onClick={handleRetry}>
           <LucideRefreshCcw className="mr-2" />
