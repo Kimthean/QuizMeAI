@@ -56,7 +56,7 @@ model Game {
   timeEnded   DateTime?
   gameType    GameType
   questions   Question[]
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
