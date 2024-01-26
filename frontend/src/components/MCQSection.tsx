@@ -135,14 +135,23 @@ function MCQSection(game: Props) {
 
   if (hasEnded) {
     return (
-      <div className="absolute flex flex-col justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="mt-2 font-semibold text-white bg-green-500 px-4 rounded-md whitespace-nowrap">
-          You&apos;ve completed the quiz! in{" "}
-          {formatTimeDelta(differenceInSeconds(now, game.game.timeStarted))}
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">
+            You&apos;ve completed the quiz!
+          </h1>
+          <p className="text-lg">
+            Time taken:{" "}
+            {formatTimeDelta(differenceInSeconds(now, game.game.timeStarted))}{" "}
+            seconds
+          </p>
         </div>
         <Link
           href={`/statistics/${game.game.id}`}
-          className={cn(buttonVariants(), "mt-2")}
+          className={cn(
+            buttonVariants(),
+            " bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-8"
+          )}
         >
           View Statistics
           <BarChart className="w-4 h-4 ml-2" />
