@@ -7,8 +7,6 @@ type Props = {
   user: Pick<User, "name" | "image">;
 };
 
-export const revalidate = 1;
-
 function UserAvatar({ user }: Props) {
   return (
     <Avatar>

@@ -26,7 +26,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
         />
       </head>
-      <body className={cn(inter.className, "antialiased pt-16")}>
+      <body className={cn(inter.className, "antialiased min-h-screen pt-16")}>
         <Provider>
           <NavBar />
           {children}

@@ -161,7 +161,7 @@ function MCQSection(game: Props) {
   }
 
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[80vw] max-w-4xl w-[90vw] max-sm:pt-60 max-sm:px-6 pb-24">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[80vw] max-w-4xl w-[90vw] max-sm:px-6 pb-24">
       <div className="flex flex-row justify-between max-sm:pt-20">
         <div className="flex flex-col max-sm:max-w-32">
           <p className="flex flex-col sm:flex-row">
