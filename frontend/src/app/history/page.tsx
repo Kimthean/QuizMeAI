@@ -15,8 +15,8 @@ const page = async (props: Props) => {
     return redirect("/");
   }
   return (
-    <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[400px]">
-      <Card>
+    <div className="inset-0 flex items-center justify-center py-10">
+      <Card className="w-10/12 lg:max-w-[500px]">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl font-bold">History</CardTitle>

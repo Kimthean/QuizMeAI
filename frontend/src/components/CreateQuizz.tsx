@@ -99,13 +99,6 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
 
   return (
     <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-        />
-        <title>Quiz Creation</title>
-      </Head>
       <div className="inset-0 flex items-center justify-center p-8">
         <Card>
           <CardHeader>
