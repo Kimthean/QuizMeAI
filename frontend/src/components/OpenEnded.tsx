@@ -46,7 +46,7 @@ const OpenEnded = (game: Props) => {
       };
       await checkAnswerSchema.parseAsync(payload);
       const response = await axios.post(
-        "http://127.0.0.1:5001/quizz-backend/us-central1/checkAnswer",
+        `${process.env.NEXT_PUBLIC_API_URL}/checkAnswer`,
         payload
       );
       return response.data;
@@ -113,7 +113,7 @@ const OpenEnded = (game: Props) => {
       const sendEndGameRequest = async () => {
         try {
           const response = await axios.post(
-            "http://127.0.0.1:5001/quizz-backend/us-central1/endGame",
+            `${process.env.NEXT_PUBLIC_API_URL}/endGame`,
             { gameId: gameId }
           );
           return response.data;

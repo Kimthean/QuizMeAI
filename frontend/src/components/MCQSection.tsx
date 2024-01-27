@@ -147,7 +147,7 @@ function MCQSection(game: Props) {
           </p>
         </div>
         <Link
-          href={`/statistics/${game.game.id}`}
+          href={`/result/${game.game.id}`}
           className={cn(
             buttonVariants(),
             " bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-8"
