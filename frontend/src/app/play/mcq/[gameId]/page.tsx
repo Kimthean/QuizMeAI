@@ -20,6 +20,7 @@ const page = async ({ params: { gameId } }: Props) => {
     });
     redirect("/");
   }
+
   const game = await prisma.game.findUnique({
     where: {
       id: gameId,
@@ -34,6 +35,7 @@ const page = async ({ params: { gameId } }: Props) => {
       },
     },
   });
+
 
   return (
     <div className="max-sm:mt-10">

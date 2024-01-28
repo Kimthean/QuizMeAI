@@ -132,6 +132,11 @@ function MCQSection(game: Props) {
       sendEndGameRequest();
     }
   }, [hasEnded, game.game.id]);
+  const timeDelta = game.game?.timeStarted
+    ? differenceInSeconds(now, game.game.timeStarted)
+    : null;
+  const formattedTimeDelta =
+    timeDelta !== null ? formatTimeDelta(timeDelta) : "00:00";
 
   if (hasEnded) {
     return (
@@ -140,11 +145,7 @@ function MCQSection(game: Props) {
           <h1 className="text-3xl font-bold mb-4">
             You&apos;ve completed the quiz!
           </h1>
-          <p className="text-lg">
-            Time taken:{" "}
-            {formatTimeDelta(differenceInSeconds(now, game.game.timeStarted))}{" "}
-            seconds
-          </p>
+          <p className="text-lg">Time taken: {formattedTimeDelta} seconds</p>
         </div>
         <Link
           href={`/result/${game.game.id}`}
@@ -172,9 +173,7 @@ function MCQSection(game: Props) {
           </p>
           <div className="flex self-start mt-3 text-slate-400">
             <Timer className="mr-2" />
-            <span>
-              {formatTimeDelta(differenceInSeconds(now, game.game.timeStarted))}
-            </span>
+            <span>{timeDelta}</span>
           </div>
         </div>
         <div className="max-sm:pt-7">
