@@ -10,7 +10,7 @@ import Leaderboard from "@/components/Leaderboard";
 const page = async () => {
 
   return (
-    <div className="inset-0 flex items-center justify-center py-20 mx-auto">
+    <div className="inset-0 flex items-center justify-center py-10 mx-auto">
       <Card className="w-10/12 lg:max-w-[500px] shadow-xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold mx-auto">

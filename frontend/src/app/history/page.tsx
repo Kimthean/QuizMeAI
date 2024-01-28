@@ -13,7 +13,7 @@ const page = async () => {
     return redirect("/");
   }
   return (
-    <div className="inset-0 flex items-center justify-center py-20">
+    <div className="inset-0 flex items-center justify-center py-10">
       <Card className="w-10/12 lg:max-w-[500px] bg-white shadow-xl">
         <CardHeader className="flex justify-between items-center p-6">
           <CardTitle className="text-2xl font-bold">History</CardTitle>
