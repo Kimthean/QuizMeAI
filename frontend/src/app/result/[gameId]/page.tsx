@@ -21,7 +21,6 @@ const Statistics = async ({ params: { gameId } }: Props) => {
   if (!game) {
     return redirect("/");
   }
-
   return (
     <>
       <div className="p-8 mx-auto max-w-7xl">

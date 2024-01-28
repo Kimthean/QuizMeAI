@@ -43,6 +43,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  averageScore  Float?
+  rank          Int?
   games         Game[]
   accounts      Account[]
   sessions      Session[]
@@ -59,7 +61,7 @@ model Game {
   questions   Question[]
   user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+  @@index([userId, id])
 }
 
 model topic_count {

@@ -139,6 +139,7 @@ function MCQSection(game: Props) {
     timeDelta !== null ? formatTimeDelta(timeDelta) : "00:00";
 
   if (hasEnded) {
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/leaderboard`);
     return (
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="text-center">

@@ -4,6 +4,7 @@ import { handler as gameHandler } from "./game";
 import { handler as checkAnswerHandler } from "./checkAnswer";
 import { handler as endGameHandler } from "./endGame";
 import { handler as resetTimeStartedHandler } from "./resetTimeStarted";
+import {handler as leaderboardHandler} from "./leaderboard";
 
 export const questions = functions
   .region("asia-east2")
@@ -19,3 +20,6 @@ export const endGame = functions
 export const resetTimeStarted = functions
   .region("asia-east2")
   .https.onRequest(resetTimeStartedHandler);
+export const leaderboard = functions
+  .region("asia-east2")
+  .https.onRequest(leaderboardHandler);
