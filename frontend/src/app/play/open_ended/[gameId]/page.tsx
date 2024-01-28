@@ -29,6 +29,9 @@ const page = async ({ params: { gameId } }: Props) => {
       },
     },
   });
+  if (!game) {
+    redirect("/");
+  }
 
   return <OpenEnded game={game} />;
 };

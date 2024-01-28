@@ -35,8 +35,13 @@ const page = async ({ params: { gameId } }: Props) => {
       },
     },
   });
-
-
+  if (!game) {
+    toast({
+      title: "Game not found",
+      variant: "destructive",
+    });
+    redirect("/");
+  }
   return (
     <div className="max-sm:mt-10">
       <MCQSection game={game} />

@@ -65,6 +65,15 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
   });
 
   const onSubmit = async (data: Input) => {
+    if (data.type !== "mcq") {
+      toast({
+        title: "Open-ended questions are temporary unavailable at the momment",
+        description: "There are a lot of bugs to fix.",
+        variant: "destructive",
+        duration: 5000,
+      });
+      return;
+    }
     setShowLoader(true);
     getQuestions(data, {
       onError: (error) => {
