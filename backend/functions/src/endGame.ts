@@ -29,6 +29,37 @@ export const handler = functions.https.onRequest(
             timeEnded: new Date(),
           },
         });
+        const questions = await prisma.question.findMany({
+          where: {
+            gameId: gameId,
+          },
+        });
+        let score;
+        if (game.gameType === "mcq") {
+          let totalCorrect = questions.reduce((acc, question) => {
+            if (question.isCorrect) {
+              return acc + 1;
+            }
+            return acc;
+          }, 0);
+          score = (totalCorrect / questions.length) * 100;
+        } else if (game.gameType === "open_ended") {
+          let totalPercentage = questions.reduce((acc, question) => {
+            if (question.percentageCorrect === null) {
+              return acc;
+            }
+            return acc + Number(question.percentageCorrect);
+          }, 0);
+          score = totalPercentage / questions.length;
+        }
+        await prisma.game.update({
+          where: {
+            id: gameId,
+          },
+          data: {
+            score: score,
+          },
+        });
         return response.json({
           message: "Game ended",
         });

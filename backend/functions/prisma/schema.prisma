@@ -51,12 +51,13 @@ model User {
 model Game {
   id          String     @id @default(cuid())
   userId      String
-  timeStarted DateTime
+  timeStarted DateTime?
   topic       String
   timeEnded   DateTime?
   gameType    GameType
+  score       Int?
   questions   Question[]
-  user        User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }

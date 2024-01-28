@@ -11,14 +11,22 @@ export const handler = functions.https.onRequest(
     corsHandler(request, response, async () => {
       try {
         const { userId, topic, type, amount } = request.body;
+
+        const { data } = await axios.post(`${process.env.API_URL}/questions`, {
+          amount,
+          topic,
+          type,
+        });
+
         const game = await prisma.game.create({
           data: {
             gameType: type,
-            timeStarted: new Date(),
+            timeStarted: null,
             userId: userId,
             topic,
           },
         });
+
         await prisma.topic_count.upsert({
           where: {
             topic,
@@ -32,12 +40,6 @@ export const handler = functions.https.onRequest(
               increment: 1,
             },
           },
-        });
-
-        const { data } = await axios.post(`${process.env.API_URL}/questions`, {
-          amount,
-          topic,
-          type,
         });
 
         if (type === "mcq") {
@@ -84,6 +86,15 @@ export const handler = functions.https.onRequest(
             }),
           });
         }
+
+        await prisma.game.update({
+          where: {
+            id: game.id,
+          },
+          data: {
+            timeStarted: new Date(),
+          },
+        });
 
         response.json({ gameId: game.id });
       } catch (error) {
