@@ -5,11 +5,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 import { BookCheck } from "lucide-react";
 
 interface User {
   id: string;
   name: string | null;
+  image: string | null;
   rank: number | null;
   averageScore: number | null;
   games: { topic: string }[];

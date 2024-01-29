@@ -10,6 +10,7 @@ const ResultCard = ({ score }: Props) => {
     <Card className="md:col-span-7">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
         <CardTitle className="text-2xl font-bold">Results</CardTitle>
+        {/* <CardTitle className="text-2xl font-bold">Congratulations Thean!!</CardTitle> */}
         <Award />
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-center h-3/5">
