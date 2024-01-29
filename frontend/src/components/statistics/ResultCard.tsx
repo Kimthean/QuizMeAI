@@ -16,7 +16,7 @@ const ResultCard = ({ score }: Props) => {
         {score !== null ? (
           score >= 75 ? (
             <>
-              <Trophy className="mr-4" color="gold" size={60} />
+              <Trophy className="mr-4" color="#ffd700" size={60} />
               <div className="flex flex-col text-2xl font-semibold text-yellow-400">
                 <span className="">Impressive!</span>
                 <span className="text-sm text-center text-black opacity-50">
@@ -26,7 +26,7 @@ const ResultCard = ({ score }: Props) => {
             </>
           ) : score >= 50 ? (
             <>
-              <Trophy className="mr-4" color="silver" size={60} />
+              <Trophy className="mr-4" color="#c0c0c0" size={60} />
               <div className="flex flex-col text-2xl font-semibold text-stone-400">
                 <span className="">Great!</span>
                 <span className="text-sm text-center text-black opacity-50">
@@ -36,7 +36,7 @@ const ResultCard = ({ score }: Props) => {
             </>
           ) : score >= 25 ? (
             <>
-              <Trophy className="mr-4" color="bronze" size={60} />
+              <Trophy className="mr-4" color="#cd7f32" size={60} />
               <div className="flex flex-col text-2xl font-semibold text-stone-400">
                 <span className="">Good job!</span>
                 <span className="text-sm text-center text-black opacity-50">

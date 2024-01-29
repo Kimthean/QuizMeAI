@@ -32,13 +32,11 @@ import LoadingQuestions from "./LoadingQuestions";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 
-type Props = {
-  topic: string;
-};
+
 
 type Input = z.infer<typeof quizzSchema>;
 
-const QuizCreation = ({ topic: topicParam }: Props) => {
+const QuizCreation = () => {
   const router = useRouter();
   const [showLoader, setShowLoader] = React.useState(false);
   const [finishedLoading, setFinishedLoading] = React.useState(false);
@@ -58,7 +56,7 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
   const form = useForm<Input>({
     resolver: zodResolver(quizzSchema),
     defaultValues: {
-      topic: topicParam,
+      // topic: "topicParam",
       type: "mcq",
       amount: 5,
     },
