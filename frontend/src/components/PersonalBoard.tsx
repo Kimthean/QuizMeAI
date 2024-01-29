@@ -6,19 +6,20 @@ import React from "react";
 type Props = {
   limit: number;
   userId: string;
+  orderBy: { score?: "desc"; timeEnded?: "desc" };
 };
 
-const History = async ({ limit, userId }: Props) => {
+const PersonalBoard = async ({ limit, userId, orderBy }: Props) => {
   const games = await prisma.game.findMany({
     take: limit,
     where: {
       userId,
     },
     include: { questions: true },
-    orderBy: {
-      timeStarted: "desc",
-    },
+    orderBy: orderBy,
   });
+
+  console.log(games);
 
   return (
     <div className="space-y-8">
@@ -47,6 +48,7 @@ const History = async ({ limit, userId }: Props) => {
                   {game.timeEnded
                     ? new Date(game.timeEnded).toLocaleDateString()
                     : "N/A"}
+                  {game.score ? ` | Score: ${game.score}` : ""}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {game.gameType === "mcq" ? "Multiple Choice" : "Open-Ended"}
@@ -60,4 +62,4 @@ const History = async ({ limit, userId }: Props) => {
   );
 };
 
-export default History;
+export default PersonalBoard;
