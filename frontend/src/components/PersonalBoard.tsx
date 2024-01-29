@@ -7,9 +7,10 @@ type Props = {
   limit: number;
   userId: string;
   orderBy: { score?: "desc"; timeEnded?: "desc" };
+  showScore?: boolean;
 };
 
-const PersonalBoard = async ({ limit, userId, orderBy }: Props) => {
+const PersonalBoard = async ({ limit, userId, orderBy, showScore = false }: Props) => {
   const games = await prisma.game.findMany({
     take: limit,
     where: {
@@ -46,7 +47,7 @@ const PersonalBoard = async ({ limit, userId, orderBy }: Props) => {
                   {game.timeEnded
                     ? new Date(game.timeEnded).toLocaleDateString()
                     : "N/A"}
-                  {game.score ? ` | Score: ${game.score}` : ""}
+                  {showScore && game.score ? ` | Score: ${game.score}` : ""}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {game.gameType === "mcq" ? "Multiple Choice" : "Open-Ended"}

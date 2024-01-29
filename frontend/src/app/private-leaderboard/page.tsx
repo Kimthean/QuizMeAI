@@ -32,6 +32,7 @@ const page = async () => {
             limit={100}
             orderBy={{ score: "desc" }}
             userId={session.user.id}
+            showScore={true}
           />
         </CardContent>
       </Card>

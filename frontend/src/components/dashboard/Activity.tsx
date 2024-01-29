@@ -39,6 +39,7 @@ const RecentActivityCard = async (props: Props) => {
           limit={50}
           orderBy={{ timeEnded: "desc" }}
           userId={session.user.id}
+          // showScore={true}
         />
       </CardContent>
     </Card>
