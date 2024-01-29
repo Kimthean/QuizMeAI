@@ -19,8 +19,6 @@ const PersonalBoard = async ({ limit, userId, orderBy }: Props) => {
     orderBy: orderBy,
   });
 
-  console.log(games);
-
   return (
     <div className="space-y-8">
       {games.map((game) => {

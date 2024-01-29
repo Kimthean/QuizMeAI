@@ -7,6 +7,7 @@ import HotTopic from "@/components/dashboard/HotTopic";
 import LeaderboardCard from "@/components/dashboard/Leaderboard";
 import PrivateLeaderboard from "@/components/dashboard/PrivateLeaderboard";
 import { prisma } from "@/lib/db";
+import HistoryCard from "@/components/dashboard/HistoryCard";
 
 export const metadata = {
   title: "Dashboard | QuizzMeAi",
@@ -20,7 +21,6 @@ const page = async () => {
     where: { id: session.user.id },
     select: { role: true },
   });
-  console.log(role);
 
   return (
     <main className="p-8 mx-auto max-w-7xl">
@@ -29,8 +29,13 @@ const page = async () => {
       </div>
       <div className="grid gap-4 mt-4 md:grid-cols-2">
         <QuizzCard />
-        {role?.role === "exclusive" && <LeaderboardCard />}
-        <PrivateLeaderboard />
+        <HistoryCard />
+        {role?.role === "exclusive" && (
+          <>
+            <LeaderboardCard />
+            <PrivateLeaderboard />
+          </>
+        )}
       </div>
       <div className="grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-7">
         <HotTopic />
