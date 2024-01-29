@@ -18,7 +18,7 @@ const page = async ({ params: { gameId } }: Props) => {
       title: "You need to be logged in to play",
       variant: "destructive",
     });
-    redirect("/");
+    // redirect("/");
   }
 
   const game = await prisma.game.findUnique({
@@ -43,7 +43,7 @@ const page = async ({ params: { gameId } }: Props) => {
     redirect("/");
   }
   return (
-    <div className="max-sm:mt-10">
+    <div className="">
       <MCQSection game={game} />
     </div>
   );

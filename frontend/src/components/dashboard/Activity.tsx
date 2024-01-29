@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { getAuthSession } from "@/lib/nextauth";
 import { redirect } from "next/navigation";
-import History from "../History";
+import PersonalBoard from "../PersonalBoard";
 import { prisma } from "@/lib/db";
 
 type Props = {};
@@ -35,7 +35,11 @@ const RecentActivityCard = async (props: Props) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="max-h-[580px] overflow-scroll">
-        <History limit={10} userId={session.user.id} />
+        <PersonalBoard
+          limit={50}
+          orderBy={{ timeEnded: "desc" }}
+          userId={session.user.id}
+        />
       </CardContent>
     </Card>
   );

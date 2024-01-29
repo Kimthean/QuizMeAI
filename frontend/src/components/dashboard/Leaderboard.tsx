@@ -3,11 +3,11 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { History } from "lucide-react";
+import { prisma } from "@/lib/db";
 
-type Props = {};
-
-const HistoryCard = (props: Props) => {
+const LeaderboardCard = () => {
   const router = useRouter();
+
   return (
     <Card
       className="hover:cursor-pointer hover:opacity-75"
@@ -26,4 +26,4 @@ const HistoryCard = (props: Props) => {
   );
 };
 
-export default HistoryCard;
+export default LeaderboardCard;

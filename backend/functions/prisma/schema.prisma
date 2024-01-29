@@ -45,6 +45,7 @@ model User {
   image         String?
   rank         Int?
   averageScore Float?
+  role          String?
   games         Game[]
   accounts      Account[]
   sessions      Session[]
