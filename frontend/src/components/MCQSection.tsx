@@ -14,6 +14,7 @@ import { cn, formatTimeDelta } from "@/lib/utils";
 import { differenceInSeconds } from "date-fns";
 import { z } from "zod";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 type Props = {
   game: Game & { questions: Pick<Question, "id" | "question" | "options">[] };
@@ -141,7 +142,8 @@ function MCQSection(game: Props) {
   if (hasEnded) {
     axios.post(`${process.env.NEXT_PUBLIC_API_URL}/leaderboard`);
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen pb-20">
+        <Image src={"/loading.gif"} width={400} height={400} alt="loading" />
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">
             You&apos;ve completed the quiz!
@@ -215,13 +217,20 @@ function MCQSection(game: Props) {
             </div>
           </Button>
         ))}
-        <Button
-          className="mt-2"
-          onClick={handleNext}
-          disabled={isChecking === "pending"}
-        >
-          Next <ChevronRight className="w-4 h-4 ml-2" />
-        </Button>
+
+        {isChecking === "pending" ? (
+          <Image
+            src="/loadingcircle.gif"
+            width={30}
+            height={30}
+            alt="loading"
+            className="items-center justify-center mx-auto"
+          />
+        ) : (
+          <Button className="mt-2" onClick={handleNext}>
+            Next <ChevronRight className="w-4 h-4 ml-2" />
+          </Button>
+        )}
       </div>
     </div>
   );

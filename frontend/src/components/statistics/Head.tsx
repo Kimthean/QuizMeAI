@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   LucideRefreshCcw,
   LucideLayoutDashboard,
@@ -9,6 +9,7 @@ import axios from "axios";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface Game {
   id: string;
@@ -21,7 +22,10 @@ interface HeadProps {
 
 const Head: React.FC<HeadProps> = ({ game }) => {
   const router = useRouter();
+  const [isRetryClicked, setRetryClicked] = useState(false);
+
   const handleRetry = async () => {
+    setRetryClicked(true);
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/resetTimeStarted`, {
       gameId: game.id,
     });
@@ -41,10 +45,24 @@ const Head: React.FC<HeadProps> = ({ game }) => {
           <BookText className="mr-2" />
           Create New Quizz
         </Link>
-        <button className={buttonVariants()} onClick={handleRetry}>
-          <LucideRefreshCcw className="mr-2" />
-          Retry
-        </button>
+        {isRetryClicked ? (
+          <Image
+            src="/loadingcircle.gif"
+            width={30}
+            height={30}
+            alt="loading"
+            className="items-center justify-center mx-auto"
+          />
+        ) : (
+          <button
+            className={buttonVariants()}
+            onClick={handleRetry}
+            disabled={isRetryClicked}
+          >
+            <LucideRefreshCcw className="mr-2" />
+            Retry
+          </button>
+        )}
       </div>
     </div>
   );
