@@ -1,6 +1,15 @@
 "use client";
 import { Game, Question } from "@prisma/client";
-import { BarChart, ChevronRight, Timer } from "lucide-react";
+import {
+  BarChart,
+  ChevronRight,
+  LucideArrowUpCircle,
+  LucideRefreshCcw,
+  MoreHorizontal,
+  RotateCcw,
+  RotateCw,
+  Timer,
+} from "lucide-react";
 import React, { useEffect } from "react";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Button, buttonVariants } from "./ui/button";
@@ -219,13 +228,7 @@ function MCQSection(game: Props) {
         ))}
 
         {isChecking === "pending" ? (
-          <Image
-            src="/loadingcircle.gif"
-            width={30}
-            height={30}
-            alt="loading"
-            className="items-center justify-center mx-auto"
-          />
+          <RotateCw className="animate-spin w-8 h-8" />
         ) : (
           <Button className="mt-2" onClick={handleNext}>
             Next <ChevronRight className="w-4 h-4 ml-2" />

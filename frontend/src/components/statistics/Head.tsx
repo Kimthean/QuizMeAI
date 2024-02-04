@@ -4,6 +4,7 @@ import {
   LucideRefreshCcw,
   LucideLayoutDashboard,
   BookText,
+  RotateCw,
 } from "lucide-react";
 import axios from "axios";
 import { buttonVariants } from "@/components/ui/button";
@@ -46,20 +47,14 @@ const Head: React.FC<HeadProps> = ({ game }) => {
           Create New Quizz
         </Link>
         {isRetryClicked ? (
-          <Image
-            src="/loadingcircle.gif"
-            width={30}
-            height={30}
-            alt="loading"
-            className="items-center justify-center mx-auto"
-          />
+          <RotateCw className="mr-2 animate-spin w-6 h-6 items-center justify-center" />
         ) : (
           <button
             className={buttonVariants()}
             onClick={handleRetry}
             disabled={isRetryClicked}
           >
-            <LucideRefreshCcw className="mr-2" />
+            <RotateCw className="w-6 h-6 mr-2" />
             Retry
           </button>
         )}
